@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reaction Tester project</title>
+    <style>
+        #shape{
+            width: 200px;
+            height: 200px;
+            background-color: rgb(255, 13, 13);
+            position: relative;
+            display: none;
+            
+        }
+    </style>
+</head>
+
+
+
+<body>
+    <h1>Reaction tester</h1>
+    <p>Click on the boxes as soon as you can</p>
+    <div id="shape"></div>
+
+    <script>
+
+        var  start_time = new Date().getTime();
+
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+        
+        
+        function move1() {
+    var shape = document.getElementById("shape");
+    shape.style.display = "block";
+    shape.style.backgroundColor = getRandomColor();
+
+    var left = Math.random() * (window.innerWidth - shape.clientWidth);
+    var top = Math.random() * (window.innerHeight - shape.clientHeight);
+
+    var size = (Math.random() * 30) + 10;
+    var height = (Math.random() * 10) + 5;
+
+    shape.style.left = left + "px";
+    shape.style.top = top + "px";
+    shape.style.width = size + "%";
+    shape.style.height = height + "%";
+    shape.style.paddingBottom = size + "%";
+
+    start_time = new Date().getTime();
+}
+
+        move1();
+        
+        document.getElementById("shape").onclick = function(){
+            document.getElementById("shape").style.display="none";
+            var end_time = new Date().getTime();
+            var timeTaken = (end_time - start_time)/1000;
+            document.getElementById("shape").style.display = "block";
+            alert(timeTaken);
+            move1();
+        }
+    </script>
+    
+</body>
+</html>
